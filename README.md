@@ -1,8 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is port of the original Vue Storefront challenge that I did https://github.com/DVT/challenge-vue-storefront-shailen-naidoo but I decided that it would be good for my internal resume to port it over to React even though I have no React experience. Here is the link to the Google Doc for the project with very bare bones mind dump of how I went about this project. https://docs.google.com/document/d/18WXIA3So3sbtUYr0DU_NNDtLhBQU-yx2bczkmvAzY_M/edit?usp=sharing
