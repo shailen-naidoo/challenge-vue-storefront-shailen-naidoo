@@ -1,0 +1,3 @@
+const BASE_QUANTITY = 0
+
+export { BASE_QUANTITY }
