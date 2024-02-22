@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { ProductService } from '../services/ProductService'
 import { Fragment } from 'react'
+import { useProductStore } from '../stores/products'
 
 // eslint-disable-next-line react/prop-types
 function ProductCard(product, index, { updateProducts }) {
@@ -25,13 +26,13 @@ function ProductCard(product, index, { updateProducts }) {
 }
 
 function Index() {
-  const [products, setProducts] = useState([])
+  const { products, setProducts } = useProductStore()
 
   useEffect(() => {
     ProductService.fetchListOfProducts()
       .then(setProducts)
       .catch((err) => window.alert(err))
-  }, [])
+  }, [setProducts])
 
   function updateProducts(e, index) {
     const cloneOfProducts = [...products]

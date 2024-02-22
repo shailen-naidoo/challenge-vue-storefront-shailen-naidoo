@@ -1,7 +1,14 @@
 import { Link, Route, Routes } from "react-router-dom"
 import Index from './pages/Index'
+import { useProductStore } from "./stores/products"
 
 function App() {
+  const { products } = useProductStore()
+
+  function totalNumberOfProductsInCart() {
+    return products.filter((product) => product.quantity > 0).length
+  }
+
   return (
     <>
       <nav className="bg-gray-800">
@@ -9,7 +16,7 @@ function App() {
           <Link to="/" className="font-bold text-white text-2xl">DVT Vue Storefront</Link>
           <ul className="hidden md:flex space-x-4 text-white">
             <li>
-              <Link to="/cart">View Cart</Link>
+              <Link to="/cart">View Cart ({totalNumberOfProductsInCart()})</Link>
             </li>
           </ul>
         </section>
