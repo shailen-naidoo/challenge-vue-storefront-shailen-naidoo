@@ -14,7 +14,7 @@ function App() {
     <>
       <nav className="bg-gray-800">
         <section className="container mx-auto px-4 py-2 flex justify-between items-center">
-          <Link to="/" className="font-bold text-white text-2xl">DVT Vue Storefront</Link>
+          <Link to="/" className="font-bold text-white text-2xl">DVT React Storefront</Link>
           <ul className="hidden md:flex space-x-4 text-white">
             <li>
               <Link to="/cart">View Cart ({totalNumberOfProductsInCart()})</Link>
