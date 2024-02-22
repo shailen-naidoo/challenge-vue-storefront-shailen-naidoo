@@ -28,7 +28,9 @@ function App() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    ProductService.fetchListOfProducts().then(setProducts)
+    ProductService.fetchListOfProducts()
+      .then(setProducts)
+      .catch((err) => window.alert(err))
   }, [])
 
   function updateProducts(e, index) {
