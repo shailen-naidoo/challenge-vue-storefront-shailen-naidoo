@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom"
 import Index from './pages/Index'
+import CartIndex from './pages/cart/Index'
 import { useProductStore } from "./stores/products"
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/cart" element={<CartIndex />} />
       </Routes>
     </>
   )
