@@ -24,7 +24,7 @@ function ProductCard(product, index, { updateProducts }) {
   )
 }
 
-function App() {
+function Index() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -52,4 +52,4 @@ function App() {
   )
 }
 
-export default App
+export default Index
