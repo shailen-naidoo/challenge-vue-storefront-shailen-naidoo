@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { ProductService } from '../services/ProductService'
 import { Fragment } from 'react'
 import { useProductStore } from '../stores/products'
@@ -31,18 +31,20 @@ function Index() {
     return products.filter((product) => product.quantity > 0)
   }, [products])
 
+  const setOrRestoreProducts = useCallback((products) => {
+    setProducts(products.map((product) => {
+      const matchedProduct = productsInCart.find((productInCart) => product.title === productInCart.title)
+
+      return {
+        ...product,
+        quantity: matchedProduct ? matchedProduct.quantity : 0
+      }
+    }))
+  }, [setProducts])
+
   useEffect(() => {
     ProductService.fetchListOfProducts()
-      .then((products) => {
-        setProducts(products.map((product) => {
-          const matchedProduct = productsInCart.find((productInCart) => product.title === productInCart.title)
-
-          return {
-            ...product,
-            quantity: matchedProduct ? matchedProduct.quantity : 0
-          }
-        }))
-      })
+      .then(setOrRestoreProducts)
       .catch((err) => window.alert(err))
   }, [setProducts])
 
