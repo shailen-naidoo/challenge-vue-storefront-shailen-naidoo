@@ -2,13 +2,12 @@ import { Link, Route, Routes } from "react-router-dom"
 import Index from './pages/Index'
 import CartIndex from './pages/cart/Index'
 import { useProductStore } from "./stores/products"
+import { useMemo } from "react"
 
 function App() {
   const { products } = useProductStore()
 
-  function totalNumberOfProductsInCart() {
-    return products.filter((product) => product.quantity > 0).length
-  }
+  const totalNumberOfProductsInCart = useMemo(() => products.filter((product) => product.quantity > 0).length, [products])
 
   return (
     <>
@@ -17,7 +16,7 @@ function App() {
           <Link to="/" className="font-bold text-white text-2xl">DVT React Storefront</Link>
           <ul className="hidden md:flex space-x-4 text-white">
             <li>
-              <Link to="/cart">View Cart ({totalNumberOfProductsInCart()})</Link>
+              <Link to="/cart">View Cart ({totalNumberOfProductsInCart})</Link>
             </li>
           </ul>
         </section>
