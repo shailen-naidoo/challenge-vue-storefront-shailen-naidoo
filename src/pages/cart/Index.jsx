@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment, useMemo } from "react"
 import { useProductStore } from "../../stores/products"
 
 function ProductCard(product, index, { removeProductFromCart }) {
@@ -28,13 +28,11 @@ function ProductCard(product, index, { removeProductFromCart }) {
 function CartIndex() {
   const { products, setProducts }  = useProductStore()
 
-  function totalProductsInCart() {
-    return products.filter((product) => product.quantity > 0)
-  }
+  const totalProductsInCart = useMemo(() => products.filter((product) => product.quantity > 0), [products])
 
-  function totalPriceOfCart() {
-    return totalProductsInCart().reduce((previousValue, { price, quantity }) => (price * quantity) + previousValue, 0)
-  }
+  const totalPriceOfCart = useMemo(() => (
+    totalProductsInCart.reduce((previousValue, { price, quantity }) => (price * quantity) + previousValue, 0)
+  ), [totalProductsInCart])
 
   function removeProductFromCart(product) {
     const productIndex = products.findIndex((p) => product === p)
@@ -48,9 +46,9 @@ function CartIndex() {
   return (
     <>
       <main className="container mx-auto">
-        <p className="text-sm mb-2 ml-4 mt-4">Total price of cart: R{totalPriceOfCart()}</p>
+        <p className="text-sm mb-2 ml-4 mt-4">Total price of cart: R{totalPriceOfCart}</p>
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {totalProductsInCart().map((products, index) => ProductCard(products, index, { removeProductFromCart }))}
+          {totalProductsInCart.map((products, index) => ProductCard(products, index, { removeProductFromCart }))}
         </section>
       </main>
     </>
