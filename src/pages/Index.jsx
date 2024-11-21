@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { ProductService } from '../services/ProductService'
 import { Fragment } from 'react'
 import { useProductStore } from '../stores/products'
 
-// eslint-disable-next-line react/prop-types
 function ProductCard(product, index, { updateProducts }) {
   return (
     <Fragment key={index}>
@@ -26,11 +25,24 @@ function ProductCard(product, index, { updateProducts }) {
 }
 
 function Index() {
-  const { products, setProducts } = useProductStore()
+  const { products, setProducts} = useProductStore()
+
+  const productsInCart = useMemo(() => {
+    return products.filter((product) => product.quantity > 0)
+  }, [products])
 
   useEffect(() => {
     ProductService.fetchListOfProducts()
-      .then(setProducts)
+      .then((products) => {
+        setProducts(products.map((product) => {
+          const matchedProduct = productsInCart.find((productInCart) => product.title === productInCart.title)
+
+          return {
+            ...product,
+            quantity: matchedProduct ? matchedProduct.quantity : 0
+          }
+        }))
+      })
       .catch((err) => window.alert(err))
   }, [setProducts])
 
