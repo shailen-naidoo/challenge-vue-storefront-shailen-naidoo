@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from "react"
 import { useProductStore } from "../../stores/products"
 
-function ProductCard(product, index, { removeProductFromCart }) {
+function ProductCard({ product, index, removeProductFromCart }) {
   return (
     <Fragment key={index}>
       <article className="card bg-white rounded-md p-4 shadow-md hover:shadow-lg cursor-pointer">
@@ -48,7 +48,7 @@ function CartIndex() {
       <main className="container mx-auto">
         <p className="text-sm mb-2 ml-4 mt-4">Total price of cart: R{totalPriceOfCart}</p>
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {totalProductsInCart.map((products, index) => ProductCard(products, index, { removeProductFromCart }))}
+          {totalProductsInCart.map((product, index) => <ProductCard key={index} {...{ product, index, removeProductFromCart}} />)}
         </section>
       </main>
     </>
