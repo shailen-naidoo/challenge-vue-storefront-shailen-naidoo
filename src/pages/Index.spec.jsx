@@ -1,8 +1,7 @@
 import { describe, test, expect, vi, beforeEach } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import App from './Index'
 import axios from 'axios'
-import { act } from 'react-dom/test-utils'
 
 vi.mock('axios')
 

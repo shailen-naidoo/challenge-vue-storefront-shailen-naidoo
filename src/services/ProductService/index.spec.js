@@ -8,12 +8,12 @@ vi.mock('axios')
 describe('Test ProductService', () => {
   describe('.fetchListOfProducts', () => {
     describe('Edge cases', () => {
-      test('If fetching the list of product fails it should raise an error to the calling function', () => {
+      test('If fetching the list of product fails it should raise an error to the calling function', async () => {
         // 1. SETUP
         axios.get.mockRejectedValueOnce('Network request failed!')
 
         // 2. ACTION + ASSERT
-        expect(ProductService.fetchListOfProducts()).rejects.toBe('Network request failed!')
+        await expect(ProductService.fetchListOfProducts()).rejects.toBe('Network request failed!')
         expect(axios.get).toBeCalledTimes(1)
         expect(axios.get).toBeCalledWith('https://fakestoreapi.com/products')
       })
