@@ -25,7 +25,7 @@ function ProductCard(product, index, { updateProducts }) {
 }
 
 function Index() {
-  const { products, setProducts} = useProductStore()
+  const { products, setProducts } = useProductStore()
 
   const productsInCart = useMemo(() => {
     return products.filter((product) => product.quantity > 0)
@@ -60,7 +60,7 @@ function Index() {
     <>
       <main className="container mx-auto">
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {products.map((products, index) => ProductCard(products, index, { updateProducts }))}
+          {products.map((product, index) => ProductCard(product, index, { updateProducts }))}
         </section>
       </main>
     </>
